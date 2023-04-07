@@ -1,10 +1,11 @@
 import './App.css'
+import Homepage from '../Homepage/Homepage'
 
 function App() {
   return (
-    <h1>
-      <h1>Tanveer</h1>
-    </h1>
+    <>
+      <Homepage />
+    </>
   )
 }
 
