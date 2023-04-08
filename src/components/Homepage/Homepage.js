@@ -1,19 +1,19 @@
 import {
-  Box,
+  AppBar,
   Button,
   Card,
-  CardActionArea,
   CardActions,
   CardContent,
   CardHeader,
   CardMedia,
   Collapse,
   Container,
-  IconButton,
+  Grid,
+  Stack,
+  TextField,
+  Toolbar,
   Typography,
 } from '@mui/material'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import ShareIcon from '@mui/icons-material/Share'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import { useEffect, useState } from 'react'
@@ -24,6 +24,7 @@ const Homepage = () => {
   const [apod, setApod] = useState({})
   const [isLoading, setIsLoading] = useState(true)
   const [isLearnMore, setIsLearnMore] = useState(false)
+  const [search, setSearch] = useState('')
   // apod = Astronomy Picture of the Day
 
   const apodUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`
@@ -43,8 +44,6 @@ const Homepage = () => {
   }
   // -------------need to style the loading
 
-  console.log(apod)
-
   const { title, url, explanation } = apod
   // ---------------change url to hdurl for high def photos
 
@@ -54,22 +53,78 @@ const Homepage = () => {
     },
   })
 
+  const pages = ['Home', 'Explore', 'About', 'Contact']
   const handleIsLearnMore = () => setIsLearnMore(!isLearnMore)
+  const handleSearch = (e) => setSearch(e.target.value)
 
   return (
     <>
       <ThemeProvider theme={darkTheme}>
+        {/* ******for Dark Theme****** */}
         <CssBaseline />
-        <Box
-          display='flex'
-          justifyContent='center'
-          height='100vh'
-          alignItems='center'
+
+        {/* ******NAVBAR****** */}
+        <AppBar position='static'>
+          <Container maxWidth='xl'>
+            <Toolbar disableGutters>
+              <Typography
+                variant='h6'
+                compoenent='div'
+                sx={{ flexGrow: 1, textTransform: 'uppercase' }}
+              >
+                Space Explorer
+              </Typography>
+              {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                {pages.map((page) => (
+                  <Button
+                    key={page}
+                    // onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    {page}
+                  </Button>
+                ))}
+              </Box> */}
+              <Stack direction='row' spacing={2}>
+                {pages.map((page) => (
+                  <Button key={page} color='inherit'>
+                    {page}
+                  </Button>
+                ))}
+              </Stack>
+            </Toolbar>
+          </Container>
+        </AppBar>
+        {/* ******Search bar****** */}
+
+        <Grid container m='1rem' justifyContent='center'>
+          <Grid item>
+            <TextField
+              id='outlined-basic'
+              label='What do you want to know?'
+              variant='outlined'
+              size='small'
+              sx={{ width: '40rem' }}
+              value={search}
+              onChange={handleSearch}
+            />
+          </Grid>
+          <Grid item alignItems='stretch' display='flex' ml='10px'>
+            <Button variant='contained' sx={{ width: '10rem' }}>
+              Search
+            </Button>
+          </Grid>
+        </Grid>
+
+        {/* ******Card - Astronomy Image of the Day****** */}
+        <Container
+          sx={{
+            width: '50%',
+          }}
         >
-          {/* -------------not able to change the width of the card using Box or Container */}
-          <Card sx={{ maxWidth: '1000' }}>
+          <Card>
             <CardHeader
-              title={title}
+              title='Astronomy Picture of the Day'
               subheader={new Date().toLocaleDateString('en-US', {
                 month: 'long',
                 day: 'numeric',
@@ -77,29 +132,26 @@ const Homepage = () => {
               })}
               sx={{ textAlign: 'center' }}
             />
-            <CardMedia component='img' height='340' image={url} alt={title} />
-            <CardActions disableSpacing>
-              <IconButton aria-label='add to favorites'>
-                <FavoriteIcon />
-              </IconButton>
-              <IconButton aria-label='share'>
-                <ShareIcon />
-              </IconButton>
-              <Button
-                size='small'
-                onClick={handleIsLearnMore}
-                sx={{ ml: 'auto', color: 'text.primary' }}
-              >
+            <CardMedia component='img' height='400' image={url} alt={title} />
+            <CardContent>
+              <Typography variant='h5' component='div'>
+                {title}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size='small'>Share</Button>
+              {/* ---------add functionality to share button */}
+              <Button size='small' onClick={handleIsLearnMore}>
                 Learn More
               </Button>
             </CardActions>
             <Collapse in={isLearnMore} timeout='auto' unmountOnExit>
               <CardContent>
-                <Typography paragraphy>{explanation}</Typography>
+                <Typography>{explanation}</Typography>
               </CardContent>
             </Collapse>
           </Card>
-        </Box>
+        </Container>
       </ThemeProvider>
     </>
   )
