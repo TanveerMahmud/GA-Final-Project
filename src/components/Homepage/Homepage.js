@@ -8,9 +8,7 @@ import {
   CardMedia,
   Collapse,
   Container,
-  Grid,
   Stack,
-  TextField,
   Toolbar,
   Typography,
 } from '@mui/material'
@@ -24,9 +22,14 @@ const Homepage = () => {
   const [apod, setApod] = useState({})
   const [isLoading, setIsLoading] = useState(true)
   const [isLearnMore, setIsLearnMore] = useState(false)
-  const [search, setSearch] = useState('')
-  // apod = Astronomy Picture of the Day
 
+  // NASA Image and Video Library Api (no API key required)
+
+  // if(isSearching) {
+  //   return <Typography>Searching...</Typography>
+  // }
+
+  // apod = Astronomy Picture of the Day
   const apodUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`
 
   useEffect(() => {
@@ -55,14 +58,12 @@ const Homepage = () => {
 
   const pages = ['Home', 'Explore', 'About', 'Contact']
   const handleIsLearnMore = () => setIsLearnMore(!isLearnMore)
-  const handleSearch = (e) => setSearch(e.target.value)
 
   return (
     <>
       <ThemeProvider theme={darkTheme}>
         {/* ******for Dark Theme****** */}
         <CssBaseline />
-
         {/* ******NAVBAR****** */}
         <AppBar position='static'>
           <Container maxWidth='xl'>
@@ -95,26 +96,6 @@ const Homepage = () => {
             </Toolbar>
           </Container>
         </AppBar>
-        {/* ******Search bar****** */}
-
-        <Grid container m='1rem' justifyContent='center'>
-          <Grid item>
-            <TextField
-              id='outlined-basic'
-              label='What do you want to know?'
-              variant='outlined'
-              size='small'
-              sx={{ width: '40rem' }}
-              value={search}
-              onChange={handleSearch}
-            />
-          </Grid>
-          <Grid item alignItems='stretch' display='flex' ml='10px'>
-            <Button variant='contained' sx={{ width: '10rem' }}>
-              Search
-            </Button>
-          </Grid>
-        </Grid>
 
         {/* ******Card - Astronomy Image of the Day****** */}
         <Container

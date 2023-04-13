@@ -21,3 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# misc js files
+/src/components/Homepage/RemovedCode.js
+/src/components/Homepage/test.js
