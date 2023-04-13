@@ -56,7 +56,7 @@ const Homepage = () => {
     },
   })
 
-  const pages = ['Home', 'Explore', 'About', 'Contact']
+  const pages = ['Home', 'Search', 'About', 'Contact']
   const handleIsLearnMore = () => setIsLearnMore(!isLearnMore)
 
   return (
@@ -75,17 +75,7 @@ const Homepage = () => {
               >
                 Space Explorer
               </Typography>
-              {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                {pages.map((page) => (
-                  <Button
-                    key={page}
-                    // onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
-                  >
-                    {page}
-                  </Button>
-                ))}
-              </Box> */}
+
               <Stack direction='row' spacing={2}>
                 {pages.map((page) => (
                   <Button key={page} color='inherit'>
