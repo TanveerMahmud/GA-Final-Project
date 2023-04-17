@@ -1,5 +1,4 @@
 import {
-  AppBar,
   Button,
   Card,
   CardActions,
@@ -8,8 +7,6 @@ import {
   CardMedia,
   Collapse,
   Container,
-  Stack,
-  Toolbar,
   Typography,
 } from '@mui/material'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
@@ -56,7 +53,6 @@ const Homepage = () => {
     },
   })
 
-  const pages = ['Home', 'Search', 'About', 'Contact']
   const handleIsLearnMore = () => setIsLearnMore(!isLearnMore)
 
   return (
@@ -64,33 +60,12 @@ const Homepage = () => {
       <ThemeProvider theme={darkTheme}>
         {/* ******for Dark Theme****** */}
         <CssBaseline />
-        {/* ******NAVBAR****** */}
-        <AppBar position='static'>
-          <Container maxWidth='xl'>
-            <Toolbar disableGutters>
-              <Typography
-                variant='h6'
-                compoenent='div'
-                sx={{ flexGrow: 1, textTransform: 'uppercase' }}
-              >
-                Space Explorer
-              </Typography>
-
-              <Stack direction='row' spacing={2}>
-                {pages.map((page) => (
-                  <Button key={page} color='inherit'>
-                    {page}
-                  </Button>
-                ))}
-              </Stack>
-            </Toolbar>
-          </Container>
-        </AppBar>
 
         {/* ******Card - Astronomy Image of the Day****** */}
         <Container
           sx={{
-            width: '50%',
+            width: '80%',
+            mb: '1rem',
           }}
         >
           <Card>
@@ -110,9 +85,11 @@ const Homepage = () => {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size='small'>Share</Button>
-              {/* ---------add functionality to share button */}
-              <Button size='small' onClick={handleIsLearnMore}>
+              <Button
+                size='small'
+                onClick={handleIsLearnMore}
+                sx={{ ml: '0.2rem' }}
+              >
                 Learn More
               </Button>
             </CardActions>

@@ -1,7 +1,4 @@
-import Details from '../Details/Details'
 import {
-  Card,
-  CardMedia,
   Container,
   CssBaseline,
   TextField,
@@ -9,13 +6,17 @@ import {
   Typography,
   createTheme,
 } from '@mui/material'
+
 import { useEffect, useState } from 'react'
+import SearchResult from '../SearchResult/SearchResult'
 
 const Search = () => {
-  const [searchInput, setSearchInput] = useState('')
-  const [searchedItems, setSearchedItems] = useState([])
-  const [isSearching, setIsSearching] = useState(false)
-  const [selectedItem, setSelectedItem] = useState(null)
+  const [searchInput, setSearchInput] = useState(
+    sessionStorage.getItem('searchInput') || ''
+  )
+  const [searchedItems, setSearchedItems] = useState(
+    JSON.parse(sessionStorage.getItem('searchedItems')) || []
+  )
 
   const darkTheme = createTheme({
     palette: {
@@ -31,42 +32,16 @@ const Search = () => {
         .then((resp) => resp.json())
         .then((data) => {
           setSearchedItems(data.collection.items)
-          setIsSearching(false)
+          sessionStorage.setItem('searchInput', searchInput)
+          sessionStorage.setItem('searchedItems', JSON.stringify(searchedItems))
         })
         .catch((error) => console.log(error))
     }
-  }, [searchInput])
-
-  if (isSearching) {
-    return <Typography>searching...</Typography>
-  }
+  }, [searchInput, searchedItems])
 
   const handleSearch = (e) => {
     setSearchInput(e.target.value)
-    setSelectedItem(null)
   }
-  const displayMore = (item) => setSelectedItem(item)
-
-  const displaySearchedItems = searchedItems.map((item, index) => {
-    return (
-      <Card
-        key={item.data[0].nasa_id}
-        sx={{ cursor: 'pointer' }}
-        onClick={() => displayMore(item)}
-      >
-        <Typography>
-          {index + 1}. {item.data[0].title.slice(0, 50)}
-        </Typography>
-        <Typography>{item.data[0].description.slice(0, 100)}...</Typography>
-        <CardMedia
-          component='img'
-          image={item.links[0].href}
-          alt={item.data[0].title}
-          sx={{ maxWidth: '10rem', maxHeight: '10rem' }}
-        />
-      </Card>
-    )
-  })
 
   return (
     <>
@@ -75,7 +50,7 @@ const Search = () => {
         <CssBaseline />
         {/* ******Search bar****** */}
         <Container
-          sx={{ display: 'flex', justifyContent: 'center', mt: '1rem' }}
+          sx={{ display: 'flex', justifyContent: 'center', m: '1rem 0' }}
         >
           <TextField
             id='outlined-basic'
@@ -90,19 +65,15 @@ const Search = () => {
 
         {/* ******Searched Content Display****** */}
 
-        {selectedItem ? (
-          <Details item={selectedItem} setSelectedItem={setSelectedItem} />
-        ) : (
-          <Container>
-            {searchInput.length > 0 ? (
-              searchedItems.length > 0 ? (
-                displaySearchedItems
-              ) : (
-                <Typography>Not found</Typography>
-              )
-            ) : null}
-          </Container>
-        )}
+        <Container>
+          {searchInput.length > 0 ? (
+            searchedItems.length > 0 ? (
+              <SearchResult searchedItems={searchedItems} />
+            ) : (
+              <Typography>Not found</Typography>
+            )
+          ) : null}
+        </Container>
       </ThemeProvider>
     </>
   )

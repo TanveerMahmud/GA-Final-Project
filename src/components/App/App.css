@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.navButtons {
+  color: inherit;
+  text-decoration: none;
+}
+
+.navBar .active {
+  font-weight: bold;
+  text-decoration: underline;
+}

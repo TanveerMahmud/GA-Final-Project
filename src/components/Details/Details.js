@@ -1,3 +1,5 @@
+import { Link, useParams } from 'react-router-dom'
+
 import { ThemeProvider } from '@emotion/react'
 import {
   Button,
@@ -11,13 +13,45 @@ import {
   Typography,
   createTheme,
 } from '@mui/material'
+import { useEffect, useState } from 'react'
 
-const Details = ({ item, setSelectedItem }) => {
+const Details = () => {
+  let params = useParams()
+  const [detail, setDetail] = useState()
+  const [isSearching, setIsSearching] = useState(true)
+
   const darkTheme = createTheme({
     palette: {
       mode: 'dark',
     },
   })
+
+  const url = `https://images-api.nasa.gov/search?q=${params.nasaID}`
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setDetail(data.collection.items)
+        setIsSearching(false)
+      })
+      .catch((error) => console.log(error))
+  }, [url])
+
+  useEffect(() => {
+    return () => {
+      sessionStorage.removeItem('searchInput')
+      sessionStorage.removeItem('searchedItems')
+    }
+  }, [])
+
+  if (isSearching) {
+    return <Typography>loading...</Typography>
+  }
+
+  const { title, description } = detail[0].data[0]
+  const { href } = detail[0].links[0]
+
   return (
     <>
       <ThemeProvider theme={darkTheme}>
@@ -28,26 +62,27 @@ const Details = ({ item, setSelectedItem }) => {
         <Container
           sx={{
             width: '80%',
+            mb: '1rem',
           }}
         >
           <Card>
-            <CardHeader
-              title={item.data[0].title}
-              sx={{ textAlign: 'center' }}
-            />
-            <CardMedia
-              component='img'
-              image={item.links[0].href}
-              alt={item.data[0].title}
-            />
+            <CardHeader title={title} sx={{ textAlign: 'center' }} />
+            <CardMedia component='img' image={href} alt={title} />
             <CardContent>
-              <Typography>{item.data[0].description}</Typography>
+              <Typography>{description}</Typography>
             </CardContent>
-            <CardActions>
-              <Button size='small'>Share</Button>
-              {/* ---------add functionality to share button */}
-              <Button size='small' onClick={() => setSelectedItem(null)}>
-                Close
+            <CardActions sx={{ justifyContent: 'center' }}>
+              <Button size='large'>
+                <Link
+                  to='/search'
+                  style={{
+                    color: 'inherit',
+                    textDecoration: 'none',
+                    padding: '0 2rem',
+                  }}
+                >
+                  Close
+                </Link>
               </Button>
             </CardActions>
           </Card>
