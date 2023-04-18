@@ -29,6 +29,7 @@ function App() {
     <BrowserRouter>
       <ThemeProvider theme={darkTheme}>
         {/* ******for Dark Theme****** */}
+        {/* Note: wrapping the App compoenent with dark theme does not work on the individual compoenents. So every compoenent has this dark theme wrapper. */}
         <CssBaseline />
         {/* ******NAVBAR****** */}
         <AppBar position='static' sx={{ mb: '1rem' }}>

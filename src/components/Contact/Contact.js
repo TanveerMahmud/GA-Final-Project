@@ -23,10 +23,10 @@ const Contact = () => {
   })
 
   const handleSubmit = (e) => {
-    // e.preventDefault()
-    // console.log('Name:', name)
-    // console.log('Email:', email)
-    // console.log('Message:', message)
+    e.preventDefault()
+    console.log('Name:', name)
+    console.log('Email:', email)
+    console.log('Message:', message)
     // send the form data to the server here
   }
 
