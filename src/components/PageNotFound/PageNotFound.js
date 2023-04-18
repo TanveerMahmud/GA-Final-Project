@@ -32,7 +32,6 @@ const PageNotFound = () => {
               style={{
                 color: 'inherit',
                 textDecoration: 'none',
-                padding: '0 2rem',
               }}
             >
               Back to Homepage
