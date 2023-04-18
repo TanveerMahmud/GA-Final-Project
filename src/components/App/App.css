@@ -44,5 +44,5 @@
 
 .navBar .active {
   font-weight: bold;
-  text-decoration: underline;
+  text-shadow: #fc0 1px 0 20px;
 }

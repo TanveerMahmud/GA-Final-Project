@@ -39,7 +39,12 @@ function App() {
               <Typography
                 variant='h6'
                 compoenent='div'
-                sx={{ flexGrow: 1, textTransform: 'uppercase' }}
+                color='text.secondary'
+                sx={{
+                  flexGrow: 1,
+                  textTransform: 'uppercase',
+                  textShadow: '1px 0 10px',
+                }}
               >
                 Space Explorer
               </Typography>

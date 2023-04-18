@@ -64,7 +64,6 @@ const Homepage = () => {
         {/* ******Card - Astronomy Image of the Day****** */}
         <Container
           sx={{
-            width: '80%',
             mb: '1rem',
           }}
         >
@@ -78,7 +77,7 @@ const Homepage = () => {
               })}
               sx={{ textAlign: 'center' }}
             />
-            <CardMedia component='img' height='400' image={url} alt={title} />
+            <CardMedia component='img' image={url} alt={title} />
             <CardContent>
               <Typography variant='h5' component='div'>
                 {title}

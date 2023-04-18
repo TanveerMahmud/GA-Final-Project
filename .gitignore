@@ -25,4 +25,3 @@ yarn-error.log*
 # misc js files
 /src/components/Homepage/RemovedCode.js
 /src/components/Search/copied.js
-/src/components/App/App.test.js

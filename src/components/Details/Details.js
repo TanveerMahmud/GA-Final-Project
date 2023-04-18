@@ -61,7 +61,6 @@ const Details = () => {
         {/* ******Card - Clicked item details****** */}
         <Container
           sx={{
-            width: '80%',
             mb: '1rem',
           }}
         >

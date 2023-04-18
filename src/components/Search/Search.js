@@ -50,13 +50,13 @@ const Search = () => {
         <CssBaseline />
         {/* ******Search bar****** */}
         <Container
-          sx={{ display: 'flex', justifyContent: 'center', m: '1rem 0' }}
+          sx={{ display: 'flex', justifyContent: 'center', m: '1rem auto' }}
         >
           <TextField
             id='outlined-basic'
             label='What do you want to know?'
             variant='outlined'
-            size='small'
+            size='large'
             sx={{ width: '40rem' }}
             value={searchInput}
             onChange={handleSearch}
@@ -70,7 +70,9 @@ const Search = () => {
             searchedItems.length > 0 ? (
               <SearchResult searchedItems={searchedItems} />
             ) : (
-              <Typography>Not found</Typography>
+              <Typography color='error' component='p' textAlign='center'>
+                Not found
+              </Typography>
             )
           ) : null}
         </Container>
