@@ -5,6 +5,7 @@ import Search from '../Search/Search'
 import About from '../About/About'
 import Contact from '../Contact/Contact'
 import Details from '../Details/Details'
+import PageNotFound from '../PageNotFound/PageNotFound'
 
 import './App.css'
 import { ThemeProvider } from '@emotion/react'
@@ -71,7 +72,7 @@ function App() {
       </ThemeProvider>
 
       <Routes>
-        <Route path='*' element={<p>page not found</p>} />
+        <Route path='*' element={<PageNotFound />} />
         <Route path='/' element={<Homepage />} />
         <Route path='/search' element={<Search />} />
         <Route path='/detail/:nasaID' element={<Details />} />

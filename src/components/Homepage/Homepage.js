@@ -13,7 +13,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import { useEffect, useState } from 'react'
 
-const NASA_API_KEY = process.env.REACT_APP_NASA_API_KEY
+const NASA_API_KEY = process.env.REACT_APP_API_KEY
 
 const Homepage = () => {
   const [apod, setApod] = useState({})
