@@ -11,13 +11,20 @@ const SearchResult = ({ searchedItems }) => {
         sx={{ cursor: 'pointer', mb: '1rem', padding: '1rem' }}
       >
         <Link to={`/detail/${nasa_id}`} style={{ textDecoration: 'none' }}>
-          <Typography color='primary'>
-            {index + 1}. {title.slice(0, 50)}
-          </Typography>
-
-          <Typography variant='body2' color='text.primary'>
-            {description.slice(0, 150)}...
-          </Typography>
+          {title ? (
+            <Typography color='primary'>
+              {index + 1}. {title}
+            </Typography>
+          ) : (
+            ''
+          )}
+          {description ? (
+            <Typography variant='body2' color='text.primary'>
+              {description.slice(0, 150)}...
+            </Typography>
+          ) : (
+            ''
+          )}
 
           <CardMedia
             component='img'

@@ -18,7 +18,7 @@ import { useEffect, useState } from 'react'
 const Details = () => {
   let params = useParams()
   const [detail, setDetail] = useState()
-  const [isSearching, setIsSearching] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
 
   const darkTheme = createTheme({
     palette: {
@@ -33,7 +33,8 @@ const Details = () => {
       .then((res) => res.json())
       .then((data) => {
         setDetail(data.collection.items)
-        setIsSearching(false)
+        console.log(data.collection)
+        setIsLoading(false)
       })
       .catch((error) => console.log(error))
   }, [url])
@@ -45,49 +46,52 @@ const Details = () => {
     }
   }, [])
 
-  if (isSearching) {
-    return <Typography>loading...</Typography>
+  if (isLoading) {
+    return (
+      <Typography variant='h5' component='p' textAlign='center'>
+        Loading...
+      </Typography>
+    )
   }
 
   const { title, description } = detail[0].data[0]
   const { href } = detail[0].links[0]
 
   return (
-    <>
-      <ThemeProvider theme={darkTheme}>
-        {/* ******for Dark Theme****** */}
-        <CssBaseline />
+    <ThemeProvider theme={darkTheme}>
+      {/* ******for Dark Theme****** */}
+      <CssBaseline />
 
-        {/* ******Card - Clicked item details****** */}
-        <Container
-          sx={{
-            mb: '1rem',
-          }}
-        >
-          <Card>
-            <CardHeader title={title} sx={{ textAlign: 'center' }} />
-            <CardMedia component='img' image={href} alt={title} />
-            <CardContent>
-              <Typography>{description}</Typography>
-            </CardContent>
-            <CardActions sx={{ justifyContent: 'center' }}>
-              <Button size='large'>
-                <Link
-                  to='/search'
-                  style={{
-                    color: 'inherit',
-                    textDecoration: 'none',
-                    padding: '0 2rem',
-                  }}
-                >
-                  Close
-                </Link>
-              </Button>
-            </CardActions>
-          </Card>
-        </Container>
-      </ThemeProvider>
-    </>
+      {/* ******Card - Clicked item details****** */}
+      <Container
+        sx={{
+          width: '60%',
+          mb: '1rem',
+        }}
+      >
+        <Card>
+          <CardHeader title={title} sx={{ textAlign: 'center' }} />
+          <CardMedia component='img' image={href} alt={title} />
+          <CardContent>
+            <Typography>{description}</Typography>
+          </CardContent>
+          <CardActions sx={{ justifyContent: 'center' }}>
+            <Button size='large'>
+              <Link
+                to='/search'
+                style={{
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  padding: '0 2rem',
+                }}
+              >
+                Close
+              </Link>
+            </Button>
+          </CardActions>
+        </Card>
+      </Container>
+    </ThemeProvider>
   )
 }
 export default Details

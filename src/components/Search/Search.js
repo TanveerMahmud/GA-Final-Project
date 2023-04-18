@@ -44,40 +44,38 @@ const Search = () => {
   }
 
   return (
-    <>
-      <ThemeProvider theme={darkTheme}>
-        {/* ******for Dark Theme****** */}
-        <CssBaseline />
-        {/* ******Search bar****** */}
-        <Container
-          sx={{ display: 'flex', justifyContent: 'center', m: '1rem auto' }}
-        >
-          <TextField
-            id='outlined-basic'
-            label='What do you want to know?'
-            variant='outlined'
-            size='large'
-            sx={{ width: '40rem' }}
-            value={searchInput}
-            onChange={handleSearch}
-          />
-        </Container>
+    <ThemeProvider theme={darkTheme}>
+      {/* ******for Dark Theme****** */}
+      <CssBaseline />
+      {/* ******Search bar****** */}
+      <Container
+        sx={{ display: 'flex', justifyContent: 'center', m: '1rem auto' }}
+      >
+        <TextField
+          id='outlined-basic'
+          label='What do you want to know?'
+          variant='outlined'
+          size='large'
+          sx={{ width: '40rem' }}
+          value={searchInput}
+          onChange={handleSearch}
+        />
+      </Container>
 
-        {/* ******Searched Content Display****** */}
+      {/* ******Searched Content Display****** */}
 
-        <Container>
-          {searchInput.length > 0 ? (
-            searchedItems.length > 0 ? (
-              <SearchResult searchedItems={searchedItems} />
-            ) : (
-              <Typography color='error' component='p' textAlign='center'>
-                Not found
-              </Typography>
-            )
-          ) : null}
-        </Container>
-      </ThemeProvider>
-    </>
+      <Container>
+        {searchInput.length > 0 ? (
+          searchedItems.length > 0 ? (
+            <SearchResult searchedItems={searchedItems} />
+          ) : (
+            <Typography color='error' component='p' textAlign='center'>
+              Not found
+            </Typography>
+          )
+        ) : null}
+      </Container>
+    </ThemeProvider>
   )
 }
 export default Search
