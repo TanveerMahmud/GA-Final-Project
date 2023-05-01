@@ -1,3 +1,14 @@
+# Deployed Link - Tanveer
+
+http://tanveer-ga-assets.s3-website-ap-southeast-2.amazonaws.com/
+
+# Issues - Tanveer
+
+When I clear the search results and change to another tab (from Search to Home, About or Contact) and then come back to Search, the search bar still has the first letter of the search.
+Example - I searched for 'moon', cleared the search and moved back to Home. When I return to Search the letter 'm' remains in the search bar
+
+I was not able to get video files when I search the NASA Image and Video Library Api.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
